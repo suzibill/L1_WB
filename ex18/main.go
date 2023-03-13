@@ -14,8 +14,8 @@ func main() {
 	ch := make(chan int)
 	var c Counter
 	wg := sync.WaitGroup{}
-	wg.Add(1)
-	go counter(5, ch, &c, &wg)
+
+	counter(5, ch, &c, &wg)
 
 	for i := 0; i < 100; i++ {
 		ch <- i
@@ -26,7 +26,7 @@ func main() {
 }
 
 func counter(worker int, ch chan int, c *Counter, wg *sync.WaitGroup) {
-	wg.Add(worker)
+	wg.Add(worker + 1)
 	for i := 0; i < worker; i++ {
 		go func(i int) {
 			for v := range ch {
