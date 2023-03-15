@@ -6,20 +6,20 @@ import (
 )
 
 func main() {
-	s := "привет 😀 hello"
+	s := "привет 😀 café"
 	s = reverseWords(s)
 	fmt.Println(s)
 }
 
 func reverseWords(s string) string {
-	ss := strings.Split(s, " ")
+	ss := strings.Fields(s)
 	fmt.Println(ss)
-	var res string
+	var sb strings.Builder
 	for i := len(ss) - 1; i >= 0; i-- {
-		res += ss[i]
+		sb.WriteString(ss[i])
 		if i != 0 {
-			res += " "
+			sb.WriteString(" ")
 		}
 	}
-	return res
+	return sb.String()
 }

@@ -3,10 +3,11 @@ package main
 import (
 	"fmt"
 	"sync"
+	"sync/atomic"
 )
 
 type Counter struct {
-	count int
+	count int32
 	mu    sync.Mutex
 }
 
@@ -30,9 +31,7 @@ func counter(worker int, ch chan int, c *Counter, wg *sync.WaitGroup) {
 	for i := 0; i < worker; i++ {
 		go func(i int) {
 			for v := range ch {
-				c.mu.Lock()
-				c.count++
-				c.mu.Unlock()
+				atomic.AddInt32(&c.count, 1)
 				fmt.Printf("count: %d worker: %d\n", v, i)
 			}
 			wg.Done()

@@ -1,20 +1,27 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"os"
+)
 
 func main() {
-	ch1 := make(chan int)
-	ch2 := make(chan int)
-	a := [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	chanIn := make(chan int)
+	chanOut := make(chan int)
+	a := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	fmt.Println(a)
 	go func() {
-		for v := range ch1 {
-			ch2 <- v * 2
+		for v := range chanIn {
+			chanOut <- v * 2
 		}
 	}()
 	for _, v := range a {
-		ch1 <- v
-		fmt.Println(<-ch2)
+		chanIn <- v
+		_, err := fmt.Fprint(os.Stdout, <-chanOut)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 }
