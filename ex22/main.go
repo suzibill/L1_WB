@@ -1,5 +1,9 @@
 package main
 
-  func main() {
+import "fmt"
 
-  }
+func main() {
+	var a, b int64
+	fmt.Scan(&a, &b)
+	fmt.Println(a*b, a/b, a+b, a-b)
+}
