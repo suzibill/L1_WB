@@ -5,10 +5,9 @@ import "fmt"
 func main() {
 	a := []string{"aboba", "abeba", "aboba", "abeba", "abeba"}
 	set := make(map[string]struct{})
-	var member struct{}
 
 	for _, v := range a {
-		set[v] = member
+		set[v] = struct{}{}
 	}
 	fmt.Println(set)
 }

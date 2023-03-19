@@ -8,7 +8,6 @@ import (
 
 type Counter struct {
 	count int32
-	mu    sync.Mutex
 }
 
 func main() {
