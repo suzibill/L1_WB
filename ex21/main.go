@@ -14,16 +14,16 @@ func (a *Adaptee) SpecificRequest() string {
 	return a.name
 }
 
-type AdapterImpl struct {
+type adapter struct {
 	adaptee *Adaptee
 }
 
-func (a *AdapterImpl) Request() string {
+func (a *adapter) Request() string {
 	return a.adaptee.SpecificRequest()
 }
 
 func main() {
 	a := &Adaptee{name: "I am adaptee"}
-	adapter := &AdapterImpl{adaptee: a}
-	fmt.Println(adapter.Request())
+	OneAdapter := &adapter{adaptee: a}
+	fmt.Println(OneAdapter.Request())
 }
